@@ -10,6 +10,7 @@ md`# Polar Clock`
       .attr("viewBox", [0, 0, width*2, height*2])
       .attr("text-anchor", "middle")
       .style("display", "block")
+      .attr('transform',`translate(${10},0)`)
       .style("font", "500 14px var(--sans-serif)");
 
   const field = svg.append("g")
@@ -49,6 +50,12 @@ md`# Polar Clock`
       .attr('opacity',1)
       .attr('font-size', '3.75em')
       .text('雕')
+  svg.append('text')
+      .attr('transform',`translate(${width/2},${height/2+25})`)
+      .attr('font-family',"方正康体简体")
+      .attr('opacity',1)
+      .attr('font-size', '0.75em')
+      .text('2021')
   fieldTick.append("text")
       .attr("dy", "0.35em")
       .attr('font-size', '0.55em')
@@ -109,7 +116,7 @@ radius / 22
 armRadius - 5
 )});
   main.variable(observer("color")).define("color", ["d3"], function(d3){return(
-d3.scaleSequential([0, 2 * Math.PI], d3.interpolateRainbow)
+d3.scaleSequential([0, 2 * Math.PI], ["#c4ebad","red"])
 )});
   main.variable(observer("arcArm")).define("arcArm", ["d3","armRadius"], function(d3,armRadius){return(
 d3.arc()
