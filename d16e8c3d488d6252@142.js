@@ -7,7 +7,7 @@ md`# Polar Clock`
   main.variable(observer("chart")).define("chart", ["d3","width","height","fields","dotRadius","color","Promises"], function*(d3,width,height,fields,dotRadius,color,Promises)
 {
   const svg = d3.create("svg")
-      .attr("viewBox", [0, 0, width, height])
+      .attr("viewBox", [0, 0, width*2, height*2])
       .attr("text-anchor", "middle")
       .style("display", "block")
       .style("font", "500 14px var(--sans-serif)");
@@ -43,8 +43,15 @@ md`# Polar Clock`
       .style("color", (d, i) => color(i / d.field.range.length * 2 * Math.PI))
       .style("transition", "fill 750ms ease-out");
 
+  svg.append('text')
+      .attr('transform',`translate(${width/2},${height/2+10})`)
+      .attr('font-family',"方正康体简体")
+      .attr('opacity',1)
+      .attr('font-size', '3.75em')
+      .text('雕')
   fieldTick.append("text")
       .attr("dy", "0.35em")
+      .attr('font-size', '0.55em')
       .attr("fill", "#222")
       .text(d => d.field.format(d.time).slice(0, 2));
 
@@ -87,7 +94,7 @@ md`# Polar Clock`
 ]
 )});
   main.variable(observer("width")).define("width", function(){return(
-      954
+      500
 )});
   main.variable(observer("height")).define("height", ["width"], function(width){return(
 width
@@ -99,7 +106,7 @@ width / 1.67
 radius / 22
 )});
   main.variable(observer("dotRadius")).define("dotRadius", ["armRadius"], function(armRadius){return(
-armRadius - 9
+armRadius - 5
 )});
   main.variable(observer("color")).define("color", ["d3"], function(d3){return(
 d3.scaleSequential([0, 2 * Math.PI], d3.interpolateRainbow)
